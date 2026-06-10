@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STYLEVERSE — 트렌드를 입다</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #fafafa;
+      --gray-100: #f2f2f2;
+      --gray-300: #d4d4d4;
+      --gray-500: #737373;
+      --gray-800: #262626;
+      --accent: #ff3d00;
+      --accent-soft: #fff0eb;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'Noto Sans KR', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(250, 250, 250, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-100);
+      transition: box-shadow 0.3s;
+    }
+
+    header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span { color: var(--accent); }
+
+    nav { display: flex; gap: 32px; }
+
+    nav a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after { width: 100%; }
+
+    .header-actions { display: flex; gap: 20px; align-items: center; }
+
+    .btn-ghost {
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 8px 20px;
+      border: 1.5px solid var(--black);
+      border-radius: 0;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.25s;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-ghost:hover { background: var(--black); color: var(--white); }
+
+    .btn-primary {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 8px 20px;
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: background 0.25s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: #e03500; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      margin-top: 64px;
+      min-height: calc(100vh - 64px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 32px; height: 2px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--gray-500);
+      max-width: 420px;
+      margin-bottom: 40px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .hero-cta { display: flex; gap: 16px; align-items: center; }
+
+    .btn-hero {
+      padding: 16px 36px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-hero:hover { background: var(--accent); }
+
+    .btn-hero-outline {
+      padding: 16px 36px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: transparent;
+      color: var(--black);
+      border: 1.5px solid var(--gray-300);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-hero-outline:hover { border-color: var(--black); }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid var(--gray-100);
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--gray-500);
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-visual {
+      position: relative;
+      background: var(--gray-100);
+      overflow: hidden;
+    }
+
+    .hero-visual-inner {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 4px;
+      padding: 4px;
+    }
+
+    .hero-img {
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s ease;
+    }
+
+    .hero-img:hover { transform: scale(1.03); }
+
+    .hero-img-1 {
+      grid-row: span 2;
+      background: linear-gradient(160deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 32px;
+    }
+
+    .hero-img-1 .card-label {
+      color: var(--white);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .hero-img-1 .card-title {
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-top: 8px;
+    }
+
+    .hero-img-2 {
+      background: linear-gradient(135deg, #ff6b35, #f7c59f);
+    }
+
+    .hero-img-3 {
+      background: linear-gradient(135deg, #2d3436, #636e72);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 64px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      z-index: 3;
+    }
+
+    .scroll-line {
+      width: 48px; height: 1px;
+      background: var(--gray-300);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      left: -100%; top: 0;
+      width: 100%; height: 100%;
+      background: var(--accent);
+      animation: scrollAnim 2s infinite;
+    }
+
+    @keyframes scrollAnim {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* ── MARQUEE ── */
+    .marquee {
+      background: var(--black);
+      color: var(--white);
+      padding: 14px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 25s linear infinite;
+    }
+
+    .marquee-track span {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0 40px;
+    }
+
+    .marquee-track .dot {
+      color: var(--accent);
+      padding: 0;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 100px 48px; }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 56px;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .section-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-bottom: 1.5px solid var(--black);
+      padding-bottom: 4px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .section-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── CATEGORIES ── */
+    .categories { background: var(--white); }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .category-card {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      cursor: pointer;
+      group: hover;
+    }
+
+    .category-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.5s ease;
+    }
+
+    .category-card:hover .category-bg { transform: scale(1.06); }
+
+    .category-card:nth-child(1) .category-bg { background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7)), linear-gradient(135deg, #667eea, #764ba2); }
+    .category-card:nth-child(2) .category-bg { background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7)), linear-gradient(135deg, #f093fb, #f5576c); }
+    .category-card:nth-child(3) .category-bg { background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7)), linear-gradient(135deg, #4facfe, #00f2fe); }
+    .category-card:nth-child(4) .category-bg { background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7)), linear-gradient(135deg, #43e97b, #38f9d7); }
+
+    .category-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 28px 24px;
+      color: var(--white);
+    }
+
+    .category-count {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 6px;
+    }
+
+    .category-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .category-arrow {
+      position: absolute;
+      top: 20px; right: 20px;
+      width: 40px; height: 40px;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--white);
+      transition: all 0.3s;
+    }
+
+    .category-card:hover .category-arrow {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+
+    /* ── TRENDING ── */
+    .trending { background: var(--gray-100); }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      background: var(--white);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    .product-img {
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card:nth-child(1) .product-img { background: linear-gradient(145deg, #e8e8e8, #c8c8c8); }
+    .product-card:nth-child(2) .product-img { background: linear-gradient(145deg, #2c2c2c, #1a1a1a); }
+    .product-card:nth-child(3) .product-img { background: linear-gradient(145deg, #f5e6d3, #d4a574); }
+    .product-card:nth-child(4) .product-img { background: linear-gradient(145deg, #d4e4f7, #8bb8e8); }
+
+    .product-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+    }
+
+    .product-wish {
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 32px; height: 32px;
+      background: var(--white);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: transform 0.2s;
+    }
+
+    .product-wish:hover { transform: scale(1.15); }
+
+    .product-info { padding: 20px; }
+
+    .product-brand {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 6px;
+    }
+
+    .product-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .product-price {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .product-price .original {
+      font-size: 0.8rem;
+      color: var(--gray-300);
+      text-decoration: line-through;
+      margin-left: 8px;
+      font-weight: 400;
+    }
+
+    /* ── BRANDS ── */
+    .brands { background: var(--black); color: var(--white); }
+
+    .brands .section-label { color: var(--accent); }
+    .brands .section-link { border-color: var(--white); color: var(--white); }
+    .brands .section-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2px;
+    }
+
+    .brand-item {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gray-800);
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+
+    .brand-item:hover {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    /* ── FEATURES ── */
+    .features { background: var(--white); }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .feature-card {
+      padding: 48px 36px;
+      border: 1px solid var(--gray-100);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 24px;
+    }
+
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .feature-desc {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: var(--accent);
+      color: var(--white);
+      padding: 80px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .cta-banner h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .cta-banner p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-top: 12px;
+      font-weight: 300;
+    }
+
+    .cta-form {
+      display: flex;
+      gap: 0;
+      flex-shrink: 0;
+    }
+
+    .cta-input {
+      padding: 16px 24px;
+      border: none;
+      background: rgba(255,255,255,0.15);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      width: 280px;
+      outline: none;
+    }
+
+    .cta-input::placeholder { color: rgba(255,255,255,0.5); }
+
+    .cta-submit {
+      padding: 16px 32px;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+
+    .cta-submit:hover { background: var(--gray-800); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      color: var(--gray-500);
+      padding: 64px 48px 32px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .footer-logo span { color: var(--accent); }
+
+    .footer-desc {
+      font-size: 0.8rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .footer-col h4 {
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--white); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 32px;
+      border-top: 1px solid var(--gray-800);
+      font-size: 0.75rem;
+    }
+
+    .footer-social { display: flex; gap: 20px; }
+
+    .footer-social a {
+      color: var(--gray-500);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .footer-social a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      header { padding: 0 24px; }
+      nav { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-visual { min-height: 400px; }
+      .hero-content { padding: 60px 24px; }
+      .hero-scroll { left: 24px; }
+      section { padding: 72px 24px; }
+      .category-grid, .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .brand-grid { grid-template-columns: repeat(3, 1fr); }
+      .feature-grid { grid-template-columns: 1fr; }
+      .cta-banner { flex-direction: column; text-align: center; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .category-grid, .product-grid { grid-template-columns: 1fr; }
+      .brand-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-stats { gap: 24px; }
+      .hero-cta { flex-direction: column; align-items: flex-start; }
+      .cta-form { flex-direction: column; width: 100%; }
+      .cta-input { width: 100%; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header id="header">
+    <a href="#" class="logo">STYLE<span>VERSE</span></a>
+    <nav>
+      <a href="#categories">카테고리</a>
+      <a href="#trending">트렌딩</a>
+      <a href="#brands">브랜드</a>
+      <a href="#features">서비스</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-ghost">로그인</button>
+      <button class="btn-primary">회원가입</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">2026 S/S Collection</div>
+      <h1>트렌드를<br><em>입다</em></h1>
+      <p class="hero-desc">
+        국내 최대 규모의 패션 큐레이션 플랫폼.<br>
+        8,000+ 브랜드, 50만+ 상품을 한곳에서 만나보세요.
+      </p>
+      <div class="hero-cta">
+        <button class="btn-hero">지금 쇼핑하기</button>
+        <button class="btn-hero-outline">브랜드 둘러보기</button>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">8,247</div>
+          <div class="stat-label">입점 브랜드</div>
+        </div>
+        <div>
+          <div class="stat-num">520K+</div>
+          <div class="stat-label">등록 상품</div>
+        </div>
+        <div>
+          <div class="stat-num">4.9</div>
+          <div class="stat-label">앱 평점</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-visual-inner">
+        <div class="hero-img hero-img-1">
+          <div>
+            <div class="card-label">Editor's Pick</div>
+            <div class="card-title">Street<br>Essentials</div>
+          </div>
+        </div>
+        <div class="hero-img hero-img-2"></div>
+        <div class="hero-img hero-img-3"></div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>New Arrivals</span><span class="dot">◆</span>
+      <span>Streetwear</span><span class="dot">◆</span>
+      <span>Minimal</span><span class="dot">◆</span>
+      <span>Vintage</span><span class="dot">◆</span>
+      <span>Designer</span><span class="dot">◆</span>
+      <span>Sustainable</span><span class="dot">◆</span>
+      <span>Limited Drop</span><span class="dot">◆</span>
+      <span>New Arrivals</span><span class="dot">◆</span>
+      <span>Streetwear</span><span class="dot">◆</span>
+      <span>Minimal</span><span class="dot">◆</span>
+      <span>Vintage</span><span class="dot">◆</span>
+      <span>Designer</span><span class="dot">◆</span>
+      <span>Sustainable</span><span class="dot">◆</span>
+      <span>Limited Drop</span><span class="dot">◆</span>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <section class="categories" id="categories">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Shop by Category</div>
+        <h2 class="section-title">카테고리별 쇼핑</h2>
+      </div>
+      <a href="#" class="section-link">전체 보기 →</a>
+    </div>
+    <div class="category-grid">
+      <div class="category-card">
+        <div class="category-bg"></div>
+        <div class="category-arrow">↗</div>
+        <div class="category-info">
+          <div class="category-count">12,400+ Items</div>
+          <div class="category-name">아우터</div>
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="category-bg"></div>
+        <div class="category-arrow">↗</div>
+        <div class="category-info">
+          <div class="category-count">28,100+ Items</div>
+          <div class="category-name">상의</div>
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="category-bg"></div>
+        <div class="category-arrow">↗</div>
+        <div class="category-info">
+          <div class="category-count">15,800+ Items</div>
+          <div class="category-name">하의</div>
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="category-bg"></div>
+        <div class="category-arrow">↗</div>
+        <div class="category-info">
+          <div class="category-count">9,200+ Items</div>
+          <div class="category-name">슈즈</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRENDING -->
+  <section class="trending" id="trending">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Trending Now</div>
+        <h2 class="section-title">실시간 인기 상품</h2>
+      </div>
+      <a href="#" class="section-link">더 보기 →</a>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-badge">BEST</span>
+          <button class="product-wish">♡</button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">ADER ERROR</div>
+          <div class="product-name">시그니처 오버핏 후드 집업 — 블랙</div>
+          <div class="product-price">₩189,000</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-badge">NEW</span>
+          <button class="product-wish">♡</button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">THISISNEVERTHAT</div>
+          <div class="product-name">클래식 로고 맨투맨 — 차콜</div>
+          <div class="product-price">₩98,000</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <button class="product-wish">♡</button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">STUSSY</div>
+          <div class="product-name">월드투어 티셔츠 — 화이트</div>
+          <div class="product-price">₩72,000 <span class="original">₩89,000</span></div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-img">
+          <span class="product-badge">SALE</span>
+          <button class="product-wish">♡</button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">NIKE</div>
+          <div class="product-name">에어 포스 1 '07 — 화이트/블랙</div>
+          <div class="product-price">₩119,000 <span class="original">₩149,000</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRANDS -->
+  <section class="brands" id="brands">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Partner Brands</div>
+        <h2 class="section-title">입점 브랜드</h2>
+      </div>
+      <a href="#" class="section-link">전체 브랜드 →</a>
+    </div>
+    <div class="brand-grid">
+      <div class="brand-item">Nike</div>
+      <div class="brand-item">Adidas</div>
+      <div class="brand-item">Stussy</div>
+      <div class="brand-item">Ader</div>
+      <div class="brand-item">Kith</div>
+      <div class="brand-item">Palace</div>
+      <div class="brand-item">Carhartt</div>
+      <div class="brand-item">New Balance</div>
+      <div class="brand-item">Supreme</div>
+      <div class="brand-item">A.P.C.</div>
+      <div class="brand-item">Acne</div>
+      <div class="brand-item">+6,000</div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="section-header">
+      <div>
+        <div class="section-label">Why STYLEVERSE</div>
+        <h2 class="section-title">왜 STYLEVERSE인가</h2>
+      </div>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">AI 스타일 큐레이션</h3>
+        <p class="feature-desc">나만의 취향을 분석해 매일 새로운 스타일을 추천합니다. 무신사만의 알고리즘이 당신의 옷장을 완성합니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3 class="feature-title">당일·새벽 배송</h3>
+        <p class="feature-desc">오후 2시 이전 주문 시 당일 출고. 새벽 배송으로 아침에 문 앞에서 받아보세요. 전국 200+ 물류 센터 운영.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">♻️</div>
+        <h3 class="feature-title">무신사 스탠다드</h3>
+        <p class="feature-desc">자체 PB 브랜드로 합리적인 가격에 프리미엄 퀄리티를 제공합니다. 지속 가능한 패션을 위한 친환경 소재 사용.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <div>
+      <h2>첫 구매 15% 할인<br>지금 바로 시작하세요</h2>
+      <p>뉴스레터 구독 시 웰컴 쿠폰을 드립니다.</p>
+    </div>
+    <form class="cta-form" onsubmit="return false;">
+      <input type="email" class="cta-input" placeholder="이메일 주소를 입력하세요">
+      <button type="submit" class="cta-submit">구독하기</button>
+    </form>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">STYLE<span>VERSE</span></div>
+        <p class="footer-desc">
+          대한민국 No.1 패션 플랫폼.<br>
+          스트릿부터 럭셔리까지, 모든 스타일을 한곳에서.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>쇼핑</h4>
+        <a href="#">신상품</a>
+        <a href="#">베스트</a>
+        <a href="#">세일</a>
+        <a href="#">브랜드</a>
+      </div>
+      <div class="footer-col">
+        <h4>고객지원</h4>
+        <a href="#">FAQ</a>
+        <a href="#">배송 안내</a>
+        <a href="#">반품/교환</a>
+        <a href="#">1:1 문의</a>
+      </div>
+      <div class="footer-col">
+        <h4>회사</h4>
+        <a href="#">회사 소개</a>
+        <a href="#">채용</a>
+        <a href="#">제휴 문의</a>
+        <a href="#">개인정보처리방침</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 STYLEVERSE Inc. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="#">Instagram</a>
+        <a href="#">YouTube</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>
+</body>
+</html>
