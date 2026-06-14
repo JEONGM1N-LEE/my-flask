@@ -1,7 +1,7 @@
 import hashlib
 
 from flask import Blueprint, render_template, request, jsonify
-from database import get_db, close_db
+from database import get_db, close_db  # database.py 파일에서 get_db, close_db 함수를 가져옴
 
 # 블루프린트 객체 생성
 user_bp = Blueprint('user', __name__, url_prefix='/api/user')
@@ -11,12 +11,12 @@ user_bp = Blueprint('user', __name__, url_prefix='/api/user')
 @user_bp.route('/login', methods=['POST'])
 def login():
     try:
-        data = request.get_json()
-        u_id = data.get('u_id')
-        pw = data.get('pw')
+        data = request.get_json() # 사용자로부터 받은 데이터를 data 변수에 저장
+        u_id = data.get('u_id') # 사용자로부터 받은 회원 u_id를 u_id 변수에 저장
+        pw = data.get('pw') # 사용자로부터 받은 회원 pw를 pw 변수에 저장
 
         # 유효성 검사
-        if not u_id or not pw:
+        if not u_id or not pw: # 입력받은 u_id 또는 pw가 없으면 오류 메시지 반환
             return jsonify({
                 'success': False,
                 'message': 'u_id, pw 는 필수입니다.',
@@ -24,17 +24,18 @@ def login():
                 'data': None
             })
 
-        pw_hash = hashlib.md5(pw.encode('utf-8')).hexdigest()
+        pw_hash = hashlib.md5(pw.encode('utf-8')).hexdigest() # pw를 md5 해시 함수로 암호화
 
         # 회원 조회
-        db = get_db()
+        db = get_db()  # database.py 파일에서 get_db 함수를 가져옴
+        
         with db.cursor() as cursor:
-            cursor.execute("SELECT * FROM `user` WHERE u_id = %s", (u_id,))
+            cursor.execute("SELECT * FROM `user` WHERE u_id = %s", (u_id,)) # user 테이블에서 u_id가 u_id(사용자로부터 받은 회원 u_id)인 회원 조회
             user = cursor.fetchone()
-            if not user:
+            if not user: # 조회된 회원 정보가 없으면 오류 메시지 반환
                 return jsonify({
                     'success': False,
-                    'message': '회원 조회 실패, 회원이 존재하지 않습니다.',
+                    'message': '입력하신 아이디의 회원이 존재하지 않습니다.',
                     'status': 401,
                     'data': None
                 })
@@ -43,7 +44,7 @@ def login():
             if user['pw'] != pw_hash:
                 return jsonify({
                     'success': False,
-                    'message': '비밀번호 오류',
+                    'message': '비밀번호가 틀립니다.',
                     'status': 400,
                     'data': None
                 })
@@ -177,17 +178,17 @@ def update_password():
         close_db()
 
 
-#회원 address 수정
+#회원 address 수정 (PUT 요청 방식)
 @user_bp.route('/update-address',methods=['PUT'])
 def update_address():
     try:
-        data = request.get_json()
+        data = request.get_json() # 사용자로부터 받은 데이터를 data 변수에 저장
 
-        id = data.get('id')
-        address = data.get('new_address')
+        id = data.get('id') # 사용자로부터 받은 회원 id를 id 변수에 저장
+        address = data.get('new_address') # 사용자로부터 받은 회원 address를 address 변수에 저장
 
         #유효성 검사
-        if not id or not address:
+        if not id or not address: # 입력받은 id 또는 address가 없으면 오류 메시지 반환
             return jsonify({
                 'success': False,
                 'message': 'id, new_address 는 필수입니다.',
@@ -196,11 +197,12 @@ def update_address():
             })
 
         #회원 조회
-        db = get_db()
+        db = get_db()  # database.py 파일에서 get_db 함수를 가져옴
+        
         with db.cursor() as cursor:
             cursor.execute("SELECT * FROM `user` WHERE id = %s", (id,))
             user = cursor.fetchone()
-            if not user:
+            if not user: # 조회된 회원 정보가 없으면 오류 메시지 반환
                 return jsonify({
                     'success': False,
                     'message': '회원 조회 실패, 회원이 존재하지 않습니다.',
@@ -233,13 +235,13 @@ def update_address():
 
 
 
-# 회원 생성
+# 회원 생성 (POST 요청 방식)
 @user_bp.route('/create-user', methods=['POST'])
 def create_user():
     try:
-        data = request.get_json()
+        data = request.get_json() # 사용자로부터 받은 데이터를 data 변수에 저장
         
-        if not data:
+        if not data: # data가 없으면 오류 메시지 반환
             return jsonify({
                 'success': False,
                 'message': 'JSON body가 필요합니다.',
@@ -252,12 +254,13 @@ def create_user():
         nick = data.get('nick')
         address = data.get('address')
 
-        db = get_db()
+        db = get_db()  # database.py 파일에서 get_db 함수를 가져옴
+        
         with db.cursor() as cursor:
 
             # u_id 중복 체크
-            cursor.execute("SELECT * FROM `user` WHERE u_id = %s", (u_id,))
-            user = cursor.fetchone()
+            cursor.execute("SELECT * FROM `user` WHERE u_id = %s", (u_id,)) # user 테이블에서 u_id가 u_id(사용자로부터 받은 회원 u_id)인 회원 조회
+            user = cursor.fetchone() # 조회된 회원 정보를 user 변수에 저장
             if user:
                 return jsonify({
                     'success': False,
@@ -267,8 +270,8 @@ def create_user():
                 })
             
             # nick 중복 체크
-            cursor.execute("SELECT * FROM `user` WHERE nick = %s", (nick,))
-            user = cursor.fetchone()
+            cursor.execute("SELECT * FROM `user` WHERE nick = %s", (nick,)) # user 테이블에서 nick가 nick(사용자로부터 받은 회원 nick)인 회원 조회
+            user = cursor.fetchone() # 조회된 회원 정보를 user 변수에 저장
             if user:
                 return jsonify({
                     'success': False,
@@ -278,7 +281,7 @@ def create_user():
                 })
 
             cursor.execute(
-                "INSERT INTO `user` (u_id, pw, nick, address, created_at) VALUES (%s, md5(%s), %s, %s, NOW())",
+                "INSERT INTO `user` (u_id, pw, nick, address, created_at) VALUES (%s, md5(%s), %s, %s, NOW())", # user 테이블에 회원 정보 삽입
                 (u_id, pw, nick, address)) # pw는 md5 해시 함수로 암호화
             db.commit()
         return jsonify({
@@ -309,15 +312,16 @@ def create_user():
 @user_bp.route('/get-user/<int:user_id>', methods=['GET'])
 def get_user(user_id):
     try :
-        db = get_db()
+        db = get_db()  # database.py 파일에서 get_db 함수를 가져옴
+
         with db.cursor() as cursor:
-            cursor.execute("SELECT * FROM `user` WHERE id = %s", (user_id,))
-            user = cursor.fetchone()
+            cursor.execute("SELECT * FROM `user` WHERE id = %s", (user_id,)) # user 테이블에서 id가 user_id(사용자로부터 받은 회원 id)인 회원 조회
+            user = cursor.fetchone() # 조회된 회원 정보를 user 변수에 저장
             return jsonify({
                 'success': True,
                 'message': '회원 조회 완료',
                 'status_code': 200,
-                'data': user
+                'data': user # 조회된 회원 정보를 반환
             })
     except Exception as e:
         print(e)
@@ -335,20 +339,20 @@ def get_user(user_id):
 # 회원 전체 조회
 @user_bp.route('/all', methods=['GET'])
 def get_all_users():
-
     try :
         # 회원 전체 select
-        db = get_db()  # db 연결
+        db = get_db()  # database.py 파일에서 get_db 함수를 가져옴
+
         # with 문을 사용하면 자동으로 커서를 닫고 db 연결을 닫습니다.
         with db.cursor() as cursor:
             cursor.execute("SELECT * FROM `user`")
-            users = cursor.fetchall()
-            close_db()
+            users = cursor.fetchall() # 조회된 모든 회원 정보를 users 변수에 저장
+            close_db()  # database.py 파일에서 close_db 함수를 가져옴
             return jsonify({
                 'success': True,
                 'message': '회원 전체 조회 완료',
                 'status_code': 200,
-                'data': users
+                'data': users # 조회된 모든 회원 정보를 반환
             })
     except Exception as e:
         print(e)

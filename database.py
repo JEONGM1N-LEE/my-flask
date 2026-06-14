@@ -1,3 +1,5 @@
+# MariaDB의 데이터베이스 연결 설정 파일
+
 from flask import g
 import pymysql
 

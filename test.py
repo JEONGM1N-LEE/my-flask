@@ -1,7 +1,9 @@
+# try, except, finally 예외 처리
+
 try :
     members = ['홍길동', '이순신', '강감찬']
 
-    one = members[5]
+    one = members[0]
 
     print(one)  # 예외가 발생하지 않을 때 실행할 코드
 
