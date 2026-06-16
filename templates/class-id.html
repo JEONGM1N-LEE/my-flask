@@ -7,40 +7,40 @@
 </head>
 
 <style>
-    .my-box{
+    .my-box{                   /* 클래스 선택자 */
         width:200px; 
         height:50px;
         background: blue;
         margin-bottom: 20px;
     }
 
-    .my-box.good{
+    .my-box.good{              /* 클래스 선택자 + 클래스 선택자 */
         width: 100px;
         height: 100px;
         background: red;
         margin-bottom: 20px;
     }
 
-    .round{
+    .round{                    /* 클래스 선택자 */
         border-radius: 15px;
         background: pink
     }
 
-    #one-box{
+    #one-box{                 /* 아이디 선택자 */
         width: 50px;
         height: 50px;
         background: black;
         margin-bottom: 20px;
     }
 
-    .parent-box .box{
+    .parent-box .box{         /* 클래스 선택자 + 클래스 선택자 */
         color: black;
         background: yellow;
         font-size: 20px;
         font-weight: bold;
     }
 
-    span{
+    span{                     /* 태그 선택자 */
         color: #EBFCF9;
         background: #0B1975;
         font-size: 14px;
@@ -51,27 +51,27 @@
 
 <body>
 
-    <div class="parent-box">
+    <div class="parent-box">                      /* 클래스 선택자 */
         <span class="box">span 1</span>
         <span class="box">span 2</span>
         <span class="box">span 3</span>
     </div>
-    <span>span 4</span>
+    <span>span 4</span>                         /* 태그 선택자 */
 
-    <div class="my-box">
+    <div class="my-box">                         /* 클래스 선택자 */
         <span>span 1</span>
         <span>span 2</span>
         <span>span 3</span>
     </div>
 
 
-    <div id="one-box"></div>
+    <div id="one-box"></div>                    /* 아이디 선택자 */
 
-    <div class="my-box good"></div>
-    <div class="round my-box" style="background: green;"></div>
+    <div class="my-box good"></div>              /* 클래스 선택자 + 클래스 선택자 */
+    <div class="round my-box" style="background: green;"></div> /* 클래스 선택자 + 클래스 선택자 + 인라인 스타일 */
     <div class="my-box"></div>
-    <span class="my-box">문법이왤케복잡하노</span>
-    <div class="my-box" style="background:#FF73A3; margin-top: 20px;"></div>
+    <span class="my-box">문법이왤케복잡하노</span> /* 클래스 선택자 + 태그 선택자 */
+    <div class="my-box" style="background:#FF73A3; margin-top: 20px;"></div> /* 클래스 선택자 + 인라인 스타일 */    
 
 </body>
 </html>

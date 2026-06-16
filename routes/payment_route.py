@@ -1,3 +1,5 @@
+# 결제 관련 백엔드 코드 작성
+
 import hashlib
 
 from flask import Blueprint, render_template, request, jsonify
@@ -127,7 +129,6 @@ def purchase():
         })
     finally:
         close_db()
-
 
 # 2. 결제 내역을 조회하는 라우트
 @payment_bp.route('/get_payment_history', methods=['GET'])
