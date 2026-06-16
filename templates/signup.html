@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>회원가입 — AUTO CARE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #2f6bff;
+      --blue-dark: #1f56e0;
+      --white: #ffffff;
+      --bg: #f5f6f8;
+      --gray-50: #f8f9fb;
+      --gray-100: #eef0f4;
+      --gray-300: #d1d5de;
+      --gray-500: #8b93a1;
+      --gray-700: #4a5160;
+      --black: #1a1d24;
+      --red: #ff3b30;
+      --radius: 12px;
+      --shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--black);
+      min-height: 100dvh;
+      max-width: 480px;
+      margin: 0 auto;
+      position: relative;
+      padding-bottom: 72px;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── HEADER ── */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .header-back {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--black);
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+
+    .header-back:hover { background: var(--gray-100); }
+
+    .header-title {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .header-home {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--gray-700);
+    }
+
+    /* ── HERO BANNER ── */
+    .hero {
+      margin: 16px 16px 0;
+      padding: 24px 20px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--blue);
+      background: #eef3ff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.4;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      margin: 12px 16px;
+      padding: 24px 20px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .form-section-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gray-500);
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field:last-of-type { margin-bottom: 0; }
+
+    .field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 8px;
+    }
+
+    .field label .required {
+      color: var(--red);
+      margin-left: 2px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 14px 16px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--black);
+      background: var(--gray-50);
+      border: 1.5px solid var(--gray-100);
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .field input::placeholder { color: var(--gray-300); }
+
+    .field input:focus {
+      border-color: var(--blue);
+      background: var(--white);
+    }
+
+    .field-hint {
+      font-size: 0.72rem;
+      color: var(--gray-500);
+      margin-top: 6px;
+    }
+
+    .error-msg {
+      display: none;
+      font-size: 0.78rem;
+      color: var(--red);
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: #fff5f5;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .error-msg.show { display: block; }
+
+    /* ── SUBMIT ── */
+    .submit-area {
+      margin: 16px 16px 24px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      background: var(--blue);
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: -0.01em;
+    }
+
+    .btn-submit:hover { background: var(--blue-dark); }
+
+    .btn-submit:active { transform: scale(0.98); }
+
+    .btn-submit:disabled {
+      background: var(--gray-300);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--gray-500);
+    }
+
+    .login-link a {
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    /* ── BOTTOM NAV ── */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
+      background: var(--white);
+      border-top: 1px solid var(--gray-100);
+      z-index: 20;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--gray-500);
+      padding: 4px 8px;
+      transition: color 0.2s;
+    }
+
+    .nav-item .icon { font-size: 1.2rem; }
+
+    .nav-item.active { color: var(--blue); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="/" class="header-back" aria-label="뒤로가기">←</a>
+    <span class="header-title">회원가입</span>
+    <a href="/" class="header-home" aria-label="홈">⌂</a>
+  </header>
+
+  <section class="hero">
+    <span class="hero-badge">WELCOME</span>
+    <h1>간편하게 가입하고<br>서비스를 이용해보세요</h1>
+    <p>정비 예약, 견적 요청, 이용내역 확인까지 한 번에.</p>
+  </section>
+
+  <form class="form-card" id="signup-form" novalidate>
+    <div class="form-section-title">기본 정보</div>
+
+    <div class="field">
+      <label for="u_id">아이디<span class="required">*</span></label>
+      <input type="text" id="u_id" name="u_id" placeholder="아이디를 입력하세요" autocomplete="username" required>
+    </div>
+
+    <div class="field">
+      <label for="pw">비밀번호<span class="required">*</span></label>
+      <input type="password" id="pw" name="pw" placeholder="비밀번호를 입력하세요" autocomplete="new-password" required>
+      <p class="field-hint">영문, 숫자 조합 6자 이상</p>
+    </div>
+
+    <div class="field">
+      <label for="pw_confirm">비밀번호 확인<span class="required">*</span></label>
+      <input type="password" id="pw_confirm" name="pw_confirm" placeholder="비밀번호를 다시 입력하세요" autocomplete="new-password" required>
+    </div>
+
+    <div class="field">
+      <label for="nick">닉네임<span class="required">*</span></label>
+      <input type="text" id="nick" name="nick" placeholder="닉네임을 입력하세요" required>
+    </div>
+
+    <div class="field">
+      <label for="address">주소<span class="required">*</span></label>
+      <input type="text" id="address" name="address" placeholder="주소를 입력하세요" required>
+    </div>
+
+    <p class="error-msg" id="error-msg"></p>
+  </form>
+
+  <div class="submit-area">
+    <button type="submit" form="signup-form" class="btn-submit" id="submit-btn">가입하기</button>
+    <p class="login-link">이미 계정이 있으신가요? <a href="/">로그인</a></p>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="/" class="nav-item">
+      <span class="icon">🏠</span>
+      <span>홈</span>
+    </a>
+    <a href="/" class="nav-item">
+      <span class="icon">🛒</span>
+      <span>쇼핑</span>
+    </a>
+    <a href="/" class="nav-item">
+      <span class="icon">💬</span>
+      <span>커뮤니티</span>
+    </a>
+    <a href="/" class="nav-item">
+      <span class="icon">📋</span>
+      <span>이용내역</span>
+    </a>
+    <a href="/signup" class="nav-item active">
+      <span class="icon">👤</span>
+      <span>내정보</span>
+    </a>
+  </nav>
+
+  <script>
+    const form = document.getElementById('signup-form');
+    const errorMsg = document.getElementById('error-msg');
+    const submitBtn = document.getElementById('submit-btn');
+
+    function showError(message) {
+      errorMsg.textContent = message;
+      errorMsg.classList.add('show');
+    }
+
+    function hideError() {
+      errorMsg.classList.remove('show');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideError();
+
+      const u_id = form.u_id.value.trim();
+      const pw = form.pw.value;
+      const pw_confirm = form.pw_confirm.value;
+      const nick = form.nick.value.trim();
+      const address = form.address.value.trim();
+
+      if (!u_id || !pw || !nick || !address) {
+        showError('필수 항목을 모두 입력해주세요.');
+        return;
+      }
+
+      if (pw.length < 6) {
+        showError('비밀번호는 6자 이상 입력해주세요.');
+        return;
+      }
+
+      if (pw !== pw_confirm) {
+        showError('비밀번호가 일치하지 않습니다.');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = '가입 처리 중...';
+
+      try {
+        const res = await fetch('/api/user/create-user', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ u_id, pw, nick, address }),
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          alert('회원가입이 완료되었습니다!');
+          window.location.href = '/';
+          return;
+        }
+
+        showError(data.message || '회원가입에 실패했습니다.');
+      } catch {
+        showError('서버와 통신 중 오류가 발생했습니다.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '가입하기';
+      }
+    });
+  </script>
+</body>
+</html>

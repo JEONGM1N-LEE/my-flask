@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>클래스 ID</title>
+</head>
+
+<style>
+    .my-box{
+        width:200px; 
+        height:50px;
+        background: blue;
+        margin-bottom: 20px;
+    }
+
+    .my-box.good{
+        width: 100px;
+        height: 100px;
+        background: red;
+        margin-bottom: 20px;
+    }
+
+    .round{
+        border-radius: 15px;
+        background: pink
+    }
+
+    #one-box{
+        width: 50px;
+        height: 50px;
+        background: black;
+        margin-bottom: 20px;
+    }
+
+    .parent-box .box{
+        color: black;
+        background: yellow;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    span{
+        color: #EBFCF9;
+        background: #0B1975;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+</style>
+
+<body>
+
+    <div class="parent-box">
+        <span class="box">span 1</span>
+        <span class="box">span 2</span>
+        <span class="box">span 3</span>
+    </div>
+    <span>span 4</span>
+
+    <div class="my-box">
+        <span>span 1</span>
+        <span>span 2</span>
+        <span>span 3</span>
+    </div>
+
+
+    <div id="one-box"></div>
+
+    <div class="my-box good"></div>
+    <div class="round my-box" style="background: green;"></div>
+    <div class="my-box"></div>
+    <span class="my-box">문법이왤케복잡하노</span>
+    <div class="my-box" style="background:#FF73A3; margin-top: 20px;"></div>
+
+</body>
+</html>
