@@ -57,6 +57,8 @@ def predict_iris():
         # 예측 모델 적용
         temp_X = np.array([[sepal_length, sepal_width, petal_length, petal_width]])
         class_number = int(loaded_model.predict(temp_X)[0])
+        probabilities = loaded_model.predict_proba(temp_X)[0]
+        confidence = float(probabilities[class_number])
 
         # 예측 결과 유효성 검사
         if class_number < 0 or class_number >= len(CLASS_NAMES):
@@ -96,6 +98,11 @@ def predict_iris():
                 'petal_width': petal_width,
                 'class_number': class_number,
                 'class_name': class_name,
+                'confidence': round(confidence * 100, 1),
+                'probabilities': {
+                    CLASS_NAMES[i]: round(float(probabilities[i]) * 100, 1)
+                    for i in range(len(CLASS_NAMES))
+                },
             }
         })
     except Exception as e:

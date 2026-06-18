@@ -27,3 +27,7 @@ def layout():
 @view_bp.route('/design')
 def design():
     return render_template('design.html')
+
+@view_bp.route('/iris')
+def iris():
+    return render_template('iris.html')

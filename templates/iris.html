@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>붓꽃(Iris) 분석하기</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/iris.css') }}">
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <section class="iris-hero">
+        <div class="iris-hero-inner">
+            <span class="iris-hero-badge">AI · 머신러닝</span>
+            <h1 class="iris-hero-title">붓꽃(Iris) 분석하기</h1>
+            <p class="iris-hero-desc">꽃잎 정보 4가지를 입력하면 붓꽃 종류를 분석합니다.</p>
+        </div>
+    </section>
+
+    <main class="iris-main">
+        <div class="iris-form-card">
+            <h2 class="iris-form-title">꽃잎 정보 입력</h2>
+            <p class="iris-form-subtitle">단위: cm</p>
+
+            <div class="iris-form" id="iris-form">
+                <div class="iris-field">
+                    <label for="sepal_length">꽃받침 길이 (Sepal Length)</label>
+                    <input type="number" id="sepal_length" name="sepal_length" step="0.1" min="0" placeholder="예: 5.1" required>
+                </div>
+
+                <div class="iris-field">
+                    <label for="sepal_width">꽃받침 너비 (Sepal Width)</label>
+                    <input type="number" id="sepal_width" name="sepal_width" step="0.1" min="0" placeholder="예: 3.5" required>
+                </div>
+
+                <div class="iris-field">
+                    <label for="petal_length">꽃잎 길이 (Petal Length)</label>
+                    <input type="number" id="petal_length" name="petal_length" step="0.1" min="0" placeholder="예: 1.4" required>
+                </div>
+
+                <div class="iris-field">
+                    <label for="petal_width">꽃잎 너비 (Petal Width)</label>
+                    <input type="number" id="petal_width" name="petal_width" step="0.1" min="0" placeholder="예: 0.2" required>
+                </div>
+
+                <button id="submit-btn" type="button" class="iris-submit-btn">분석하기</button>
+            </div>
+        </div>
+
+        <div class="iris-result-card" id="iris-result" hidden>
+            <div class="iris-result-header">
+                <span class="iris-result-badge">분석 완료</span>
+                <h2 class="iris-result-title">예측 결과</h2>
+                <p class="iris-result-class" id="result-class-name">—</p>
+                <p class="iris-result-desc">입력하신 꽃잎 정보는 위 종류의 붓꽃으로 분석되었습니다.</p>
+            </div>
+
+            <div class="iris-confidence-block">
+                <div class="iris-confidence-top">
+                    <span class="iris-confidence-label">예측 신뢰도</span>
+                    <span class="iris-confidence-value" id="result-confidence">0%</span>
+                </div>
+                <div class="iris-progress-track">
+                    <div class="iris-progress-fill iris-progress-fill--main" id="result-confidence-bar"></div>
+                </div>
+            </div>
+
+            <div class="iris-prob-section">
+                <p class="iris-prob-section-title">종류별 확률</p>
+                <ul class="iris-prob-list" id="prob-list"></ul>
+            </div>
+        </div>
+
+        <div class="iris-error-card" id="iris-error" hidden>
+            <p class="iris-error-title">분석 실패</p>
+            <p class="iris-error-message" id="iris-error-message"></p>
+        </div>
+    </main>
+
+    
+    <script src="{{ url_for('static', filename='js/iris.js') }}"></script>
+</body>
+</html>
