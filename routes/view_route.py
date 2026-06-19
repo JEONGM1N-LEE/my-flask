@@ -31,3 +31,7 @@ def design():
 @view_bp.route('/iris')
 def iris():
     return render_template('iris.html')
+
+@view_bp.route('/car')
+def car():
+    return render_template('car.html')

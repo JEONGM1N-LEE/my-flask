@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연비 예측 · FUEL RIDER</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/car.css') }}">
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- 배경 장식 -->
+    <div class="kr-bg" aria-hidden="true">
+        <div class="kr-cloud kr-cloud-1"></div>
+        <div class="kr-cloud kr-cloud-2"></div>
+        <div class="kr-cloud kr-cloud-3"></div>
+        <div class="kr-sparkle"></div>
+        <div class="kr-sparkle"></div>
+        <div class="kr-sparkle"></div>
+        <div class="kr-sparkle"></div>
+        <div class="kr-speed-lines"></div>
+        <div class="kr-track"></div>
+    </div>
+
+    <div class="kr-kart-deco kr-kart-left" aria-hidden="true">🏎️</div>
+    <div class="kr-kart-deco kr-kart-right" aria-hidden="true">🚗</div>
+
+    <div class="kr-page">
+        <!-- 로고 -->
+        <header class="kr-logo-wrap">
+            <span class="kr-logo-badge">MACHINE LEARNING</span>
+            <h1 class="kr-logo-title">FUEL RIDER</h1>
+            <p class="kr-logo-sub">배기량 · 무게 · 기통수로 연비를 예측하세요!</p>
+        </header>
+
+        <!-- 입력 패널 -->
+        <section class="kr-panel">
+            <div class="kr-panel-header">
+                <h2>차량 스펙 입력</h2>
+                <p>값을 입력하고 START 버튼을 눌러주세요</p>
+            </div>
+
+            <div class="kr-panel-body">
+                <form id="car-form" novalidate>
+                    <div class="kr-field">
+                        <label for="bagi">
+                            <span class="kr-field-icon">⚙</span>
+                            배기량 (Displacement)
+                        </label>
+                        <input type="number" id="bagi" name="bagi" step="1" min="0" placeholder="예: 140" required>
+                        <p class="kr-field-hint">단위: cubic inches (ci)</p>
+                    </div>
+
+                    <div class="kr-field">
+                        <label for="weight">
+                            <span class="kr-field-icon">⚖</span>
+                            무게 (Weight)
+                        </label>
+                        <input type="number" id="weight" name="weight" step="1" min="0" placeholder="예: 2900" required>
+                        <p class="kr-field-hint">단위: lbs (파운드)</p>
+                    </div>
+
+                    <div class="kr-field">
+                        <label for="cylinder">
+                            <span class="kr-field-icon">🔧</span>
+                            기통수 (Cylinders)
+                        </label>
+                        <input type="number" id="cylinder" name="cylinder" step="1" min="1" max="12" placeholder="예: 4" required>
+                        <p class="kr-field-hint">3 ~ 8 기통 (일반 승용차)</p>
+                    </div>
+
+                    <button id="submit-btn" type="button" class="kr-start-btn">START ▶</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 결과 -->
+        <section class="kr-result" id="car-result" hidden>
+            <span class="kr-result-badge">🏁 FINISH!</span>
+            <p class="kr-result-label">예측 연비</p>
+            <p class="kr-result-value" id="result-mpg">—</p>
+            <p class="kr-result-unit">MPG (마일당 갤런)</p>
+            <div class="kr-result-gauge">
+                <div class="kr-result-gauge-fill" id="result-gauge-fill"></div>
+            </div>
+            <p class="kr-result-desc">입력하신 차량 스펙을 기반으로 AI가 연비를 예측했습니다.</p>
+        </section>
+
+        <!-- 에러 -->
+        <div class="kr-error" id="car-error" hidden>
+            <p class="kr-error-title">⚠ 예측 실패</p>
+            <p class="kr-error-message" id="car-error-message"></p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/car.js') }}"></script>
+</body>
+</html>

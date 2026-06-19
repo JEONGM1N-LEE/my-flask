@@ -8,9 +8,11 @@ from routes.california_route import cali_bp
 from routes.user_route import user_bp
 from routes.item_route import item_bp
 from routes.payment_route import payment_bp
+from flask_cors import CORS
 
 # Flask 애플리케이션 초기화
 app = Flask(__name__)
+CORS(app)      # CORS 확장 프로그램을 사용하여 모든 출처에서의 요청을 허용 (기본값)
 
 # 블루프린트 등록 : 라우팅 그룹화
 app.register_blueprint(view_bp)
