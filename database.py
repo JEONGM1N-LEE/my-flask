@@ -4,10 +4,10 @@ from flask import g
 import pymysql
 
 db_config = {
-    'host': 'localhost',  # 3.36.28.140 강사님 서버
+    'host': '43.200.39.239',  # localhost 대신 실제 서버 주소로 변경
     'port': 3306,
-    'user': 'root',         # jmcoding 
-    'password': 'Mdb@Pass94!2', # 123qwe! 강사님 서버 비밀번호
+    'user': 'jmcoding',     # root 대신 실제 사용자 이름으로 변경
+    'password': '123qwe!',  # Mdb@Pass94!2
     'db': 'alpha_shop_db',
     'charset': 'utf8mb4',
     'cursorclass': pymysql.cursors.DictCursor
